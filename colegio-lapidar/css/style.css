@@ -875,6 +875,15 @@ section {
   font-size: 0.85rem;
   color: var(--text-soft);
   font-weight: 300;
+  margin-bottom: 0.75rem;
+}
+
+.product-sizes {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
   margin-bottom: 1rem;
 }
 
