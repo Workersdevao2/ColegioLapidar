@@ -29,6 +29,9 @@ colegio-lapidar/
 │       ├── nivel-1-3.jpg         ← Card 1.ª–3.ª Classe
 │       ├── nivel-4-6.jpg         ← Card 4.ª–6.ª Classe
 │       ├── nivel-7-9.jpg         ← Card 7.ª–9.ª Classe
+│       ├── extra-ballet.jpg      ← Extracurricular Ballet
+│       ├── extra-xadrez.jpg      ← Extracurricular Xadrez
+│       ├── extra-karate.jpg      ← Extracurricular Karaté
 │       ├── matriculas.jpg        ← Flyer antigo (backup)
 │       └── heroi.jpg             ← Material institucional
 └── README.md
@@ -141,6 +144,7 @@ python3 -m http.server 8080
 - Toggle PT / EN completo
 - Correcções mobile Chrome: overflow, tabelas com scroll, header e barra de anúncio
 - Imagens reais nos cards de **Níveis de Ensino**
+- Imagens nas **Actividades Extracurriculares** (Ballet, Xadrez, Karaté)
 - Remoção de todos os emojis (estilo luxury limpo)
 
 ---
