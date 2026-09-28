@@ -22,6 +22,9 @@ colegio-lapidar/
 │       ├── logo.svg              ← Versão SVG antiga (opcional)
 │       ├── campus.jpg            ← Foto do campus (hero / sobre)
 │       ├── matriculas-banner.jpg ← Banner oficial matrículas 2026/2027
+│       ├── uniforme-polo.jpg     ← Polo oficial (loja)
+│       ├── uniforme-saia.jpg     ← Saia oficial (loja)
+│       ├── uniforme-calca.jpg    ← Calça oficial (loja)
 │       ├── matriculas.jpg        ← Flyer antigo (backup)
 │       └── heroi.jpg             ← Material institucional
 └── README.md
@@ -38,7 +41,7 @@ colegio-lapidar/
 | **Níveis** | Iniciação → 9.ª Classe |
 | **Preços** | Taxas, propinas, extracurriculares, multas, emolumentos |
 | **Regulamento** | 10 regras de pagamento (descontos, prazos, métodos, suspensão) |
-| **Uniformes** | Loja escolar — encomenda via WhatsApp |
+| **Uniformes** | Polo 8.500 · Saia 7.500 · Calça 9.000 Kz (S/M/L) — encomenda WhatsApp |
 | **Matrículas** | Documentos + banner oficial + destaques |
 | **Contacto** | Morada, telefone, e-mail, formulário → WhatsApp |
 
@@ -54,7 +57,7 @@ colegio-lapidar/
 - Tabela de preços completa 2026/2027 (taxas, propinas, multas, emolumentos)
 - Extracurriculares: Ballet, Xadrez, Karaté + inscrição 3.000 Kz
 - Secção Regulamento com condições de pagamento
-- Uniformes com botões de encomenda WhatsApp
+- Loja de uniformes (3 produtos com fotos oficiais, preços e tamanhos S/M/L)
 - Banner oficial de matrículas + 7 destaques
 - Formulário de contacto → WhatsApp com mensagem pré-preenchida
 - Botão flutuante WhatsApp
@@ -129,6 +132,7 @@ python3 -m http.server 8080
 - Tabelas de **multas por atraso** e **emolumentos**
 - Banner oficial de matrículas + destaques do colégio
 - **Morada** Benfica, Rua 32 no contacto e footer
+- Loja de uniformes: Polo / Saia / Calça com fotos, preços e tamanhos S·M·L
 - Barra de anúncio + botão flutuante WhatsApp
 - Toggle PT / EN completo
 
