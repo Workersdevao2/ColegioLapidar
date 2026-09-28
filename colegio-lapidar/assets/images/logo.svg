@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" fill="none">
+  <!-- Shield -->
+  <path d="M60 8 L108 28 L108 78 C108 108 60 132 60 132 C60 132 12 108 12 78 L12 28 Z" fill="#1a2332" stroke="#c9a227" stroke-width="1.5"/>
+  <!-- Inner shield highlight -->
+  <path d="M60 16 L100 32 L100 76 C100 100 60 120 60 120 C60 120 20 100 20 76 L20 32 Z" fill="#243044"/>
+  <!-- Laurel left -->
+  <path d="M22 95 Q10 80 18 60 Q8 70 12 90 Q18 100 22 95" stroke="#c9a227" stroke-width="1.2" fill="none"/>
+  <path d="M26 100 Q14 85 20 65" stroke="#c9a227" stroke-width="1" fill="none"/>
+  <!-- Laurel right -->
+  <path d="M98 95 Q110 80 102 60 Q112 70 108 90 Q102 100 98 95" stroke="#c9a227" stroke-width="1.2" fill="none"/>
+  <path d="M94 100 Q106 85 100 65" stroke="#c9a227" stroke-width="1" fill="none"/>
+  <!-- Diamond -->
+  <path d="M60 42 L72 58 L60 74 L48 58 Z" fill="#c9a227" stroke="#e8d48b" stroke-width="0.8"/>
+  <path d="M60 48 L66 58 L60 68 L54 58 Z" fill="#f5e6a3"/>
+  <!-- Pencil -->
+  <rect x="78" y="38" width="4" height="28" rx="0.5" fill="#e07a3d" transform="rotate(25 80 52)"/>
+  <polygon points="80,36 84,40 78,42" fill="#f5d0a9" transform="rotate(25 80 52)"/>
+  <!-- Text LAPIDAR under -->
+  <text x="60" y="148" text-anchor="middle" font-family="serif" font-size="14" font-weight="500" fill="#1a2332" letter-spacing="2">LAPIDAR</text>
+</svg>
