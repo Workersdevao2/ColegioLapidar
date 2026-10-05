@@ -19,6 +19,26 @@
 
   <div class="overlay" aria-hidden="true"></div>
 
+  <!-- Mini cart drawer (right) -->
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Carrinho" aria-hidden="true">
+    <div class="cart-drawer-header">
+      <h2 class="cart-drawer-title" data-i18n="cart_drawer_title">O seu carrinho</h2>
+      <button type="button" class="cart-drawer-close" id="cart-drawer-close" aria-label="Fechar">&times;</button>
+    </div>
+    <div class="cart-drawer-body">
+      <div id="drawer-cart-items" class="cart-items"></div>
+      <div id="drawer-cart-empty" class="cart-empty" data-i18n="cart_empty">O seu carrinho está vazio. Adicione uniformes na loja.</div>
+    </div>
+    <div class="cart-drawer-footer" id="drawer-cart-footer" hidden>
+      <div class="cart-total-row">
+        <span data-i18n="cart_total">Total</span>
+        <strong id="drawer-cart-total">0 Kz</strong>
+      </div>
+      <a href="checkout.html" class="btn btn-primary btn-block" data-i18n="cart_checkout">Finalizar encomenda</a>
+      <button type="button" class="btn btn-sm cart-clear" id="drawer-cart-clear" data-i18n="cart_clear">Limpar carrinho</button>
+    </div>
+  </aside>
+
   <!-- Announcement bar -->
   <a href="index.html#matriculas" class="announce-bar" role="status">
     <div class="announce-inner">

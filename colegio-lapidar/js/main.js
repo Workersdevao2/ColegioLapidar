@@ -129,6 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
       checkout_note: 'A encomenda será enviada por WhatsApp. Não há pagamento online — confirme com a secretaria.',
       checkout_back: '← Continuar a comprar',
       checkout_shop: 'Ver uniformes',
+      cart_drawer_title: 'O seu carrinho',
+      cart_checkout: 'Finalizar encomenda',
       toast_added: 'Adicionado ao carrinho',
       enroll_label: 'Admissão',
       enroll_title: 'Matrículas e Confirmações',
@@ -305,6 +307,8 @@ document.addEventListener('DOMContentLoaded', () => {
       checkout_note: 'The order will be sent via WhatsApp. No online payment — confirm with the school office.',
       checkout_back: '← Continue shopping',
       checkout_shop: 'View uniforms',
+      cart_drawer_title: 'Your cart',
+      cart_checkout: 'Checkout',
       toast_added: 'Added to cart',
       enroll_label: 'Admission',
       enroll_title: 'Enrollment & Confirmation',
@@ -439,34 +443,72 @@ document.addEventListener('DOMContentLoaded', () => {
   const navMobile = document.querySelector('.nav-mobile');
   const overlay = document.querySelector('.overlay');
   const closeBtn = document.querySelector('.nav-mobile-close');
+  const cartDrawer = document.getElementById('cart-drawer');
+
+  function syncBodyLock() {
+    const menuOpen = navMobile?.classList.contains('open');
+    const cartOpen = cartDrawer?.classList.contains('open');
+    document.body.style.overflow = (menuOpen || cartOpen) ? 'hidden' : '';
+    if (cartOpen) document.body.classList.add('cart-open');
+    else document.body.classList.remove('cart-open');
+    if (menuOpen || cartOpen) overlay?.classList.add('show');
+    else overlay?.classList.remove('show');
+  }
 
   function closeMenu() {
-    hamburger.classList.remove('active');
-    hamburger.setAttribute('aria-expanded', 'false');
-    navMobile.classList.remove('open');
-    overlay.classList.remove('show');
-    document.body.style.overflow = '';
+    hamburger?.classList.remove('active');
+    hamburger?.setAttribute('aria-expanded', 'false');
+    navMobile?.classList.remove('open');
+    syncBodyLock();
   }
 
   function openMenu() {
-    hamburger.classList.add('active');
-    hamburger.setAttribute('aria-expanded', 'true');
-    navMobile.classList.add('open');
-    overlay.classList.add('show');
-    document.body.style.overflow = 'hidden';
+    closeCartDrawer();
+    hamburger?.classList.add('active');
+    hamburger?.setAttribute('aria-expanded', 'true');
+    navMobile?.classList.add('open');
+    syncBodyLock();
   }
 
-  hamburger.addEventListener('click', () => {
-    if (navMobile.classList.contains('open')) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
+  function openCartDrawer() {
+    closeMenu();
+    if (!cartDrawer) return;
+    renderDrawerCart();
+    cartDrawer.classList.add('open');
+    cartDrawer.setAttribute('aria-hidden', 'false');
+    syncBodyLock();
+  }
+
+  function closeCartDrawer() {
+    if (!cartDrawer) return;
+    cartDrawer.classList.remove('open');
+    cartDrawer.setAttribute('aria-hidden', 'true');
+    syncBodyLock();
+  }
+
+  hamburger?.addEventListener('click', () => {
+    if (navMobile?.classList.contains('open')) closeMenu();
+    else openMenu();
   });
 
   if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-  overlay.addEventListener('click', closeMenu);
-  navMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  navMobile?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  overlay?.addEventListener('click', () => {
+    closeMenu();
+    closeCartDrawer();
+  });
+
+  document.getElementById('cart-drawer-close')?.addEventListener('click', closeCartDrawer);
+
+  // Bag icon opens drawer (not navigate away)
+  document.querySelectorAll('.cart-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (cartDrawer?.classList.contains('open')) closeCartDrawer();
+      else openCartDrawer();
+    });
+  });
 
   // ---------- Active nav link ----------
   const sections = document.querySelectorAll('section[id]');
@@ -531,6 +573,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function saveCart(cart) {
     localStorage.setItem(CART_KEY, JSON.stringify(cart));
     renderCart();
+    renderDrawerCart();
     updateBadge();
   }
 
@@ -558,54 +601,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function showToast(msg) {
-    let toast = document.querySelector('.toast');
-    if (!toast) {
-      toast = document.createElement('div');
-      toast.className = 'toast';
-      document.body.appendChild(toast);
-    }
-    toast.textContent = msg;
-    toast.classList.add('show');
-    clearTimeout(toast._timer);
-    toast._timer = setTimeout(() => toast.classList.remove('show'), 2200);
-  }
-
   function productName(item) {
     return currentLang === 'en' && item.nameEn ? item.nameEn : item.name;
   }
 
-  function renderCart() {
-    const cart = getCart();
-    const list = document.getElementById('cart-items');
-    const empty = document.getElementById('cart-empty');
-    const footer = document.getElementById('cart-footer');
-    const totalEl = document.getElementById('cart-total');
-    const submitBtn = document.getElementById('checkout-submit');
-
-    if (!list) return;
-
-    list.innerHTML = '';
-
-    if (cart.length === 0) {
-      if (empty) empty.style.display = '';
-      if (footer) footer.hidden = true;
-      if (submitBtn) submitBtn.disabled = true;
-      return;
-    }
-
-    if (empty) empty.style.display = 'none';
-    if (footer) footer.hidden = false;
-    if (submitBtn) submitBtn.disabled = false;
-    if (totalEl) totalEl.textContent = formatKz(cartTotal());
-
+  function buildCartItemHTML(item, idx) {
     const removeLabel = translations[currentLang]?.cart_remove || 'Remover';
     const sizeLabel = translations[currentLang]?.cart_size || 'Tamanho';
-
-    cart.forEach((item, idx) => {
-      const row = document.createElement('div');
-      row.className = 'cart-item';
-      row.innerHTML = `
+    return `
+      <div class="cart-item">
         <img class="cart-item-img" src="${productImages[item.id] || ''}" alt="" loading="lazy" />
         <div class="cart-item-info">
           <h4>${productName(item)}</h4>
@@ -620,13 +624,55 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <button type="button" class="cart-item-remove" data-action="remove" data-idx="${idx}">${removeLabel}</button>
         </div>
-      `;
-      list.appendChild(row);
+      </div>
+    `;
+  }
+
+  function renderList(listEl, emptyEl, footerEl, totalEl, submitBtn) {
+    const cart = getCart();
+    if (!listEl) return;
+
+    listEl.innerHTML = '';
+
+    if (cart.length === 0) {
+      if (emptyEl) emptyEl.style.display = '';
+      if (footerEl) footerEl.hidden = true;
+      if (submitBtn) submitBtn.disabled = true;
+      return;
+    }
+
+    if (emptyEl) emptyEl.style.display = 'none';
+    if (footerEl) footerEl.hidden = false;
+    if (submitBtn) submitBtn.disabled = false;
+    if (totalEl) totalEl.textContent = formatKz(cartTotal());
+
+    cart.forEach((item, idx) => {
+      listEl.insertAdjacentHTML('beforeend', buildCartItemHTML(item, idx));
     });
   }
 
-  // Cart item actions (qty / remove)
-  document.getElementById('cart-items')?.addEventListener('click', (e) => {
+  function renderCart() {
+    renderList(
+      document.getElementById('cart-items'),
+      document.getElementById('cart-empty'),
+      document.getElementById('cart-footer'),
+      document.getElementById('cart-total'),
+      document.getElementById('checkout-submit')
+    );
+  }
+
+  function renderDrawerCart() {
+    renderList(
+      document.getElementById('drawer-cart-items'),
+      document.getElementById('drawer-cart-empty'),
+      document.getElementById('drawer-cart-footer'),
+      document.getElementById('drawer-cart-total'),
+      null
+    );
+  }
+
+  // Cart item actions (qty / remove) — works in drawer and checkout page
+  function handleCartAction(e) {
     const btn = e.target.closest('[data-action]');
     if (!btn) return;
     const idx = parseInt(btn.dataset.idx, 10);
@@ -642,15 +688,16 @@ document.addEventListener('DOMContentLoaded', () => {
       cart.splice(idx, 1);
     }
     saveCart(cart);
-  });
+  }
 
-  document.getElementById('cart-clear')?.addEventListener('click', () => {
-    saveCart([]);
-  });
+  document.getElementById('cart-items')?.addEventListener('click', handleCartAction);
+  document.getElementById('drawer-cart-items')?.addEventListener('click', handleCartAction);
+
+  document.getElementById('cart-clear')?.addEventListener('click', () => saveCart([]));
+  document.getElementById('drawer-cart-clear')?.addEventListener('click', () => saveCart([]));
 
   // Product card interactions
   document.querySelectorAll('.product-card').forEach(card => {
-    // Size select
     card.querySelectorAll('.size-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         card.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
@@ -658,7 +705,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Qty
     const qtyInput = card.querySelector('.qty-input');
     card.querySelector('.qty-minus')?.addEventListener('click', () => {
       qtyInput.value = Math.max(1, parseInt(qtyInput.value, 10) - 1);
@@ -667,7 +713,7 @@ document.addEventListener('DOMContentLoaded', () => {
       qtyInput.value = Math.min(20, parseInt(qtyInput.value, 10) + 1);
     });
 
-    // Add to cart
+    // Add to cart → open right drawer
     card.querySelector('.btn-add-cart')?.addEventListener('click', () => {
       const id = card.dataset.id;
       const name = card.dataset.name;
@@ -684,8 +730,8 @@ document.addEventListener('DOMContentLoaded', () => {
         cart.push({ id, name, nameEn, price, size, qty });
       }
       saveCart(cart);
-      showToast(translations[currentLang]?.toast_added || 'Adicionado ao carrinho');
       qtyInput.value = 1;
+      openCartDrawer();
     });
   });
 
@@ -729,9 +775,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
   });
 
-  // Placeholder i18n for checkout notes
-  const origSetLanguage = setLanguage;
-  // Re-apply placeholders when language changes
+  // Re-apply placeholders + cart labels when language changes
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       setTimeout(() => {
@@ -740,6 +784,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ta.placeholder = translations[currentLang].co_notes_ph;
         }
         renderCart();
+        renderDrawerCart();
       }, 0);
     });
   });
@@ -747,6 +792,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Init cart UI
   updateBadge();
   renderCart();
+  renderDrawerCart();
   const taInit = document.getElementById('co-notes');
   if (taInit && translations[currentLang]?.co_notes_ph) {
     taInit.placeholder = translations[currentLang].co_notes_ph;
