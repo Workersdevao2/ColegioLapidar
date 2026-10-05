@@ -22,24 +22,29 @@
   <div class="overlay" aria-hidden="true"></div>
 
   <!-- Announcement bar -->
-  <div class="announce-bar" role="status">
-    <div class="container announce-inner">
-      <span data-i18n="announce">Matrículas 2026/2027 abertas — Vagas limitadas</span>
-      <a href="#matriculas" class="announce-link" data-i18n="announce_cta">Saber mais →</a>
+  <a href="#matriculas" class="announce-bar" role="status">
+    <div class="announce-inner">
+      <span data-i18n-html="announce">Matrículas 2026/2027 abertas — <em>Vagas limitadas</em></span>
     </div>
-  </div>
+  </a>
 
   <!-- ========== HEADER ========== -->
   <header class="header">
     <div class="header-inner">
-      <a href="#inicio" class="logo" aria-label="Colégio Lapidar">
-        <img src="assets/images/logo.png" alt="Colégio Lapidar" width="48" height="56" />
-        <div class="logo-text">
-          Colégio Lapidar
-          <span>Educar para Transformar</span>
-        </div>
+      <!-- Mobile: hamburger left -->
+      <button class="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Brand (text only, centered) -->
+      <a href="#inicio" class="brand" aria-label="Colégio Lapidar">
+        <span class="brand-name">Colégio Lapidar</span>
+        <span class="brand-tagline">Educar para Transformar</span>
       </a>
 
+      <!-- Desktop nav (below brand on large screens) -->
       <nav class="nav-desktop" aria-label="Navegação principal">
         <ul>
           <li><a href="#inicio" data-i18n="nav_home">Início</a></li>
@@ -53,22 +58,30 @@
         </ul>
       </nav>
 
+      <!-- Right actions (cart + lang) -->
       <div class="header-actions">
+        <a href="#checkout" class="cart-btn" aria-label="Carrinho">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          <span class="cart-badge" id="cart-badge" hidden>0</span>
+        </a>
         <div class="lang-toggle" role="group" aria-label="Language">
           <button type="button" class="lang-btn active" data-lang="pt">PT</button>
           <button type="button" class="lang-btn" data-lang="en">EN</button>
         </div>
-        <button class="hamburger" aria-label="Menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
       </div>
     </div>
   </header>
 
-  <!-- Mobile nav -->
+  <!-- Mobile drawer (slides from left) -->
   <nav class="nav-mobile" aria-label="Menu móvel">
+    <div class="nav-mobile-header">
+      <span class="nav-mobile-brand">Colégio Lapidar</span>
+      <button class="nav-mobile-close" aria-label="Fechar menu">&times;</button>
+    </div>
     <ul>
       <li><a href="#inicio" data-i18n="nav_home">Início</a></li>
       <li><a href="#sobre" data-i18n="nav_about">Sobre</a></li>
@@ -76,6 +89,7 @@
       <li><a href="#precos" data-i18n="nav_prices">Preços</a></li>
       <li><a href="#regulamento" data-i18n="nav_rules">Regulamento</a></li>
       <li><a href="#uniformes" data-i18n="nav_products">Uniformes</a></li>
+      <li><a href="#checkout" data-i18n="nav_checkout">Carrinho</a></li>
       <li><a href="#matriculas" data-i18n="nav_enroll">Matrículas</a></li>
       <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
     </ul>
@@ -445,10 +459,10 @@
         <div class="text-center mb-4">
           <span class="section-label" data-i18n="products_label">Loja Escolar</span>
           <h2 data-i18n="products_title">Uniformes Escolares</h2>
-          <p class="lead" style="margin: 0 auto;" data-i18n="products_lead">Uniformes oficiais do Colégio Lapidar. Disponíveis na secretaria e sob encomenda.</p>
+          <p class="lead" style="margin: 0 auto;" data-i18n="products_lead">Uniformes oficiais do Colégio Lapidar. Escolha o tamanho e adicione ao carrinho.</p>
         </div>
         <div class="grid-3">
-          <article class="product-card">
+          <article class="product-card" data-id="polo" data-name="Polo Oficial" data-price="8500" data-name-en="Official Polo">
             <div class="card-img">
               <img src="assets/images/uniforme-polo.jpg" alt="Polo oficial Colégio Lapidar" loading="lazy" />
             </div>
@@ -456,11 +470,23 @@
               <h3 data-i18n="prod1_title">Polo Oficial</h3>
               <div class="product-price">8.500 Kz</div>
               <p data-i18n="prod1_desc">Camisa polo branca com gola e punhos castanhos. Logótipo bordado no peito. Algodão de qualidade.</p>
-              <div class="product-sizes" data-i18n="prod_sizes">Tamanhos: S · M · L</div>
-              <a href="#" class="btn btn-sm btn-accent" data-product="Polo Oficial Colégio Lapidar (8.500 Kz) — Tamanho:" data-i18n="prod_cta">Encomendar via WhatsApp</a>
+              <div class="size-picker" role="group" aria-label="Tamanho">
+                <button type="button" class="size-btn active" data-size="S">S</button>
+                <button type="button" class="size-btn" data-size="M">M</button>
+                <button type="button" class="size-btn" data-size="L">L</button>
+              </div>
+              <div class="qty-row">
+                <label class="qty-label" data-i18n="qty_label">Qtd</label>
+                <div class="qty-controls">
+                  <button type="button" class="qty-btn qty-minus" aria-label="Menos">−</button>
+                  <input type="number" class="qty-input" value="1" min="1" max="20" readonly />
+                  <button type="button" class="qty-btn qty-plus" aria-label="Mais">+</button>
+                </div>
+              </div>
+              <button type="button" class="btn btn-sm btn-accent btn-add-cart" data-i18n="prod_add">Adicionar ao carrinho</button>
             </div>
           </article>
-          <article class="product-card">
+          <article class="product-card" data-id="saia" data-name="Saia Oficial" data-price="7500" data-name-en="Official Skirt">
             <div class="card-img">
               <img src="assets/images/uniforme-saia.jpg" alt="Saia oficial Colégio Lapidar" loading="lazy" />
             </div>
@@ -468,11 +494,23 @@
               <h3 data-i18n="prod2_title">Saia Oficial</h3>
               <div class="product-price">7.500 Kz</div>
               <p data-i18n="prod2_desc">Saia castanha institucional, corte A-line até ao joelho. Confortável e elegante.</p>
-              <div class="product-sizes" data-i18n="prod_sizes">Tamanhos: S · M · L</div>
-              <a href="#" class="btn btn-sm btn-accent" data-product="Saia Oficial Colégio Lapidar (7.500 Kz) — Tamanho:" data-i18n="prod_cta">Encomendar via WhatsApp</a>
+              <div class="size-picker" role="group" aria-label="Tamanho">
+                <button type="button" class="size-btn active" data-size="S">S</button>
+                <button type="button" class="size-btn" data-size="M">M</button>
+                <button type="button" class="size-btn" data-size="L">L</button>
+              </div>
+              <div class="qty-row">
+                <label class="qty-label" data-i18n="qty_label">Qtd</label>
+                <div class="qty-controls">
+                  <button type="button" class="qty-btn qty-minus" aria-label="Menos">−</button>
+                  <input type="number" class="qty-input" value="1" min="1" max="20" readonly />
+                  <button type="button" class="qty-btn qty-plus" aria-label="Mais">+</button>
+                </div>
+              </div>
+              <button type="button" class="btn btn-sm btn-accent btn-add-cart" data-i18n="prod_add">Adicionar ao carrinho</button>
             </div>
           </article>
-          <article class="product-card">
+          <article class="product-card" data-id="calca" data-name="Calça Oficial" data-price="9000" data-name-en="Official Trousers">
             <div class="card-img">
               <img src="assets/images/uniforme-calca.jpg" alt="Calça oficial Colégio Lapidar" loading="lazy" />
             </div>
@@ -480,10 +518,76 @@
               <h3 data-i18n="prod3_title">Calça Oficial</h3>
               <div class="product-price">9.000 Kz</div>
               <p data-i18n="prod3_desc">Calça castanha institucional, corte clássico recto. Tecido resistente e confortável.</p>
-              <div class="product-sizes" data-i18n="prod_sizes">Tamanhos: S · M · L</div>
-              <a href="#" class="btn btn-sm btn-accent" data-product="Calça Oficial Colégio Lapidar (9.000 Kz) — Tamanho:" data-i18n="prod_cta">Encomendar via WhatsApp</a>
+              <div class="size-picker" role="group" aria-label="Tamanho">
+                <button type="button" class="size-btn active" data-size="S">S</button>
+                <button type="button" class="size-btn" data-size="M">M</button>
+                <button type="button" class="size-btn" data-size="L">L</button>
+              </div>
+              <div class="qty-row">
+                <label class="qty-label" data-i18n="qty_label">Qtd</label>
+                <div class="qty-controls">
+                  <button type="button" class="qty-btn qty-minus" aria-label="Menos">−</button>
+                  <input type="number" class="qty-input" value="1" min="1" max="20" readonly />
+                  <button type="button" class="qty-btn qty-plus" aria-label="Mais">+</button>
+                </div>
+              </div>
+              <button type="button" class="btn btn-sm btn-accent btn-add-cart" data-i18n="prod_add">Adicionar ao carrinho</button>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CHECKOUT ========== -->
+    <section id="checkout" class="section-alt">
+      <div class="container">
+        <div class="text-center mb-4">
+          <span class="section-label" data-i18n="checkout_label">Carrinho</span>
+          <h2 data-i18n="checkout_title">Finalizar Encomenda</h2>
+          <p class="lead" style="margin: 0 auto;" data-i18n="checkout_lead">Revise os artigos e envie a encomenda por WhatsApp. Confirmaremos disponibilidade e pagamento.</p>
+        </div>
+
+        <div class="checkout-grid">
+          <div class="checkout-cart card">
+            <h3 class="checkout-heading" data-i18n="checkout_items">Artigos</h3>
+            <div id="cart-items" class="cart-items">
+              <!-- filled by JS -->
+            </div>
+            <div id="cart-empty" class="cart-empty" data-i18n="cart_empty">O seu carrinho está vazio. Adicione uniformes na loja.</div>
+            <div class="cart-footer" id="cart-footer" hidden>
+              <div class="cart-total-row">
+                <span data-i18n="cart_total">Total</span>
+                <strong id="cart-total">0 Kz</strong>
+              </div>
+              <button type="button" class="btn btn-sm cart-clear" id="cart-clear" data-i18n="cart_clear">Limpar carrinho</button>
+            </div>
+          </div>
+
+          <div class="checkout-form-wrap card">
+            <h3 class="checkout-heading" data-i18n="checkout_details">Dados da encomenda</h3>
+            <form id="checkout-form" novalidate>
+              <div class="form-group">
+                <label for="co-name" data-i18n="form_name">Nome completo *</label>
+                <input type="text" id="co-name" name="name" required autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="co-phone" data-i18n="form_phone">Telefone / WhatsApp *</label>
+                <input type="tel" id="co-phone" name="phone" required autocomplete="tel" placeholder="+244 ..." />
+              </div>
+              <div class="form-group">
+                <label for="co-student" data-i18n="co_student">Nome do aluno (opcional)</label>
+                <input type="text" id="co-student" name="student" autocomplete="off" />
+              </div>
+              <div class="form-group">
+                <label for="co-notes" data-i18n="co_notes">Observações</label>
+                <textarea id="co-notes" name="notes" rows="3" data-i18n-placeholder="co_notes_ph" placeholder="Ex.: tamanho especial, levantamento na secretaria..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block" id="checkout-submit" data-i18n="checkout_submit" disabled>
+                Enviar encomenda via WhatsApp
+              </button>
+              <p class="checkout-note" data-i18n="checkout_note">A encomenda será enviada por WhatsApp. Não há pagamento online — confirme com a secretaria.</p>
+            </form>
+          </div>
         </div>
       </div>
     </section>
@@ -707,17 +811,6 @@
       </div>
     </div>
   </footer>
-
-  <!-- Floating WhatsApp -->
-  <a href="https://wa.me/244950456485?text=Ol%C3%A1!%20Gostaria%20de%20obter%20informa%C3%A7%C3%B5es%20sobre%20o%20Col%C3%A9gio%20Lapidar."
-     class="wa-float"
-     target="_blank"
-     rel="noopener"
-     aria-label="WhatsApp Colégio Lapidar">
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-    </svg>
-  </a>
 
   <script src="js/main.js"></script>
 </body>

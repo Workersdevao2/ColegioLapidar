@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       nav_products: 'Uniformes',
       nav_enroll: 'Matrículas',
       nav_contact: 'Contacto',
-      announce: 'Matrículas 2026/2027 abertas — Vagas limitadas',
+      announce: 'Matrículas 2026/2027 abertas — <em>Vagas limitadas</em>',
       announce_cta: 'Saber mais →',
       hero_label: 'Ano Lectivo 2026/2027',
       hero_title: 'Educar para Transformar',
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
       reg10_desc: 'Em caso de encerramento por determinação legal, calamidade ou força maior, as propinas mantêm-se devidas se o ensino à distância estiver garantido. A Direcção reserva-se o direito de alterar normas em benefício da comunidade escolar.',
       products_label: 'Loja Escolar',
       products_title: 'Uniformes Escolares',
-      products_lead: 'Uniformes oficiais do Colégio Lapidar. Disponíveis na secretaria e sob encomenda.',
+      products_lead: 'Uniformes oficiais do Colégio Lapidar. Escolha o tamanho e adicione ao carrinho.',
       prod1_title: 'Polo Oficial',
       prod1_desc: 'Camisa polo branca com gola e punhos castanhos. Logótipo bordado no peito. Algodão de qualidade.',
       prod2_title: 'Saia Oficial',
@@ -109,6 +109,25 @@ document.addEventListener('DOMContentLoaded', () => {
       prod3_desc: 'Calça castanha institucional, corte clássico recto. Tecido resistente e confortável.',
       prod_sizes: 'Tamanhos: S · M · L',
       prod_cta: 'Encomendar via WhatsApp',
+      prod_add: 'Adicionar ao carrinho',
+      qty_label: 'Qtd',
+      nav_checkout: 'Carrinho',
+      checkout_label: 'Carrinho',
+      checkout_title: 'Finalizar Encomenda',
+      checkout_lead: 'Revise os artigos e envie a encomenda por WhatsApp. Confirmaremos disponibilidade e pagamento.',
+      checkout_items: 'Artigos',
+      checkout_details: 'Dados da encomenda',
+      cart_empty: 'O seu carrinho está vazio. Adicione uniformes na loja.',
+      cart_total: 'Total',
+      cart_clear: 'Limpar carrinho',
+      cart_remove: 'Remover',
+      cart_size: 'Tamanho',
+      co_student: 'Nome do aluno (opcional)',
+      co_notes: 'Observações',
+      co_notes_ph: 'Ex.: tamanho especial, levantamento na secretaria...',
+      checkout_submit: 'Enviar encomenda via WhatsApp',
+      checkout_note: 'A encomenda será enviada por WhatsApp. Não há pagamento online — confirme com a secretaria.',
+      toast_added: 'Adicionado ao carrinho',
       enroll_label: 'Admissão',
       enroll_title: 'Matrículas e Confirmações',
       enroll_lead: 'Ano Lectivo 2026/2027 — Vagas limitadas. Período: 10/07/2026 a 30/07/2026.',
@@ -167,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
       nav_products: 'Uniforms',
       nav_enroll: 'Enrollment',
       nav_contact: 'Contact',
-      announce: 'Enrollment 2026/2027 open — Limited places',
+      announce: 'Enrollment 2026/2027 open — <em>Limited places</em>',
       announce_cta: 'Learn more →',
       hero_label: 'Academic Year 2026/2027',
       hero_title: 'Educate to Transform',
@@ -255,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
       reg10_desc: 'In case of closure due to legal determination, public calamity or force majeure, tuition remains due if distance learning is provided. Management reserves the right to amend rules for the benefit of the school community.',
       products_label: 'School Shop',
       products_title: 'School Uniforms',
-      products_lead: 'Official Colégio Lapidar uniforms. Available at the office and by order.',
+      products_lead: 'Official Colégio Lapidar uniforms. Choose size and add to cart.',
       prod1_title: 'Official Polo',
       prod1_desc: 'White polo shirt with brown collar and cuffs. Embroidered crest on the chest. Quality cotton.',
       prod2_title: 'Official Skirt',
@@ -264,6 +283,25 @@ document.addEventListener('DOMContentLoaded', () => {
       prod3_desc: 'Institutional brown classic straight-cut trousers. Durable and comfortable fabric.',
       prod_sizes: 'Sizes: S · M · L',
       prod_cta: 'Order via WhatsApp',
+      prod_add: 'Add to cart',
+      qty_label: 'Qty',
+      nav_checkout: 'Cart',
+      checkout_label: 'Cart',
+      checkout_title: 'Checkout',
+      checkout_lead: 'Review your items and send the order via WhatsApp. We will confirm availability and payment.',
+      checkout_items: 'Items',
+      checkout_details: 'Order details',
+      cart_empty: 'Your cart is empty. Add uniforms from the shop.',
+      cart_total: 'Total',
+      cart_clear: 'Clear cart',
+      cart_remove: 'Remove',
+      cart_size: 'Size',
+      co_student: 'Student name (optional)',
+      co_notes: 'Notes',
+      co_notes_ph: 'E.g. special size, pick up at the office...',
+      checkout_submit: 'Send order via WhatsApp',
+      checkout_note: 'The order will be sent via WhatsApp. No online payment — confirm with the school office.',
+      toast_added: 'Added to cart',
       enroll_label: 'Admission',
       enroll_title: 'Enrollment & Confirmation',
       enroll_lead: 'Academic Year 2026/2027 — Limited places. Period: 10/07/2026 to 30/07/2026.',
@@ -360,31 +398,69 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
   });
 
-  // ---------- Header scroll ----------
+  // ---------- Header + announce scroll behavior ----------
   const header = document.querySelector('.header');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 20);
-  });
+  const announceBar = document.querySelector('.announce-bar');
+  let lastScrollY = 0;
+  let ticking = false;
 
-  // ---------- Mobile menu ----------
+  function updateHeaderOnScroll() {
+    const y = window.scrollY;
+
+    // Solid header after any meaningful scroll
+    header.classList.toggle('scrolled', y > 40);
+
+    // Announce bar: hide on scroll down, show near top
+    if (y > 80 && y > lastScrollY) {
+      announceBar.classList.add('hidden');
+      header.classList.add('announce-hidden');
+    } else if (y < 40 || y < lastScrollY) {
+      announceBar.classList.remove('hidden');
+      header.classList.remove('announce-hidden');
+    }
+
+    lastScrollY = y;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateHeaderOnScroll);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // ---------- Mobile menu (left drawer) ----------
   const hamburger = document.querySelector('.hamburger');
   const navMobile = document.querySelector('.nav-mobile');
   const overlay = document.querySelector('.overlay');
+  const closeBtn = document.querySelector('.nav-mobile-close');
 
   function closeMenu() {
     hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
     navMobile.classList.remove('open');
     overlay.classList.remove('show');
     document.body.style.overflow = '';
   }
 
+  function openMenu() {
+    hamburger.classList.add('active');
+    hamburger.setAttribute('aria-expanded', 'true');
+    navMobile.classList.add('open');
+    overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
   hamburger.addEventListener('click', () => {
-    const isOpen = hamburger.classList.toggle('active');
-    navMobile.classList.toggle('open', isOpen);
-    overlay.classList.toggle('show', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+    if (navMobile.classList.contains('open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   });
 
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
   overlay.addEventListener('click', closeMenu);
   navMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
@@ -430,15 +506,245 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ---------- Product WhatsApp order ----------
-  document.querySelectorAll('[data-product]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const product = btn.getAttribute('data-product');
-      const text = currentLang === 'pt'
-        ? `Olá! Gostaria de encomendar o seguinte artigo:\n\n*${product}*\n\nPor favor indiquem disponibilidade e tamanhos.`
-        : `Hello! I would like to order the following item:\n\n*${product}*\n\nPlease let me know availability and sizes.`;
-      window.open(`https://wa.me/244950456485?text=${encodeURIComponent(text)}`, '_blank');
+  // ---------- Cart & Checkout ----------
+  const CART_KEY = 'lapidar-cart';
+  const WA_NUMBER = '244950456485';
+
+  const productImages = {
+    polo: 'assets/images/uniforme-polo.jpg',
+    saia: 'assets/images/uniforme-saia.jpg',
+    calca: 'assets/images/uniforme-calca.jpg'
+  };
+
+  function getCart() {
+    try {
+      return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    renderCart();
+    updateBadge();
+  }
+
+  function formatKz(n) {
+    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' Kz';
+  }
+
+  function cartCount() {
+    return getCart().reduce((s, i) => s + i.qty, 0);
+  }
+
+  function cartTotal() {
+    return getCart().reduce((s, i) => s + i.price * i.qty, 0);
+  }
+
+  function updateBadge() {
+    const badge = document.getElementById('cart-badge');
+    if (!badge) return;
+    const n = cartCount();
+    if (n > 0) {
+      badge.textContent = n > 99 ? '99+' : n;
+      badge.hidden = false;
+    } else {
+      badge.hidden = true;
+    }
+  }
+
+  function showToast(msg) {
+    let toast = document.querySelector('.toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.className = 'toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  function productName(item) {
+    return currentLang === 'en' && item.nameEn ? item.nameEn : item.name;
+  }
+
+  function renderCart() {
+    const cart = getCart();
+    const list = document.getElementById('cart-items');
+    const empty = document.getElementById('cart-empty');
+    const footer = document.getElementById('cart-footer');
+    const totalEl = document.getElementById('cart-total');
+    const submitBtn = document.getElementById('checkout-submit');
+
+    if (!list) return;
+
+    list.innerHTML = '';
+
+    if (cart.length === 0) {
+      if (empty) empty.style.display = '';
+      if (footer) footer.hidden = true;
+      if (submitBtn) submitBtn.disabled = true;
+      return;
+    }
+
+    if (empty) empty.style.display = 'none';
+    if (footer) footer.hidden = false;
+    if (submitBtn) submitBtn.disabled = false;
+    if (totalEl) totalEl.textContent = formatKz(cartTotal());
+
+    const removeLabel = translations[currentLang]?.cart_remove || 'Remover';
+    const sizeLabel = translations[currentLang]?.cart_size || 'Tamanho';
+
+    cart.forEach((item, idx) => {
+      const row = document.createElement('div');
+      row.className = 'cart-item';
+      row.innerHTML = `
+        <img class="cart-item-img" src="${productImages[item.id] || ''}" alt="" loading="lazy" />
+        <div class="cart-item-info">
+          <h4>${productName(item)}</h4>
+          <div class="cart-item-meta">${sizeLabel}: ${item.size}</div>
+          <div class="cart-item-price">${formatKz(item.price * item.qty)}</div>
+        </div>
+        <div class="cart-item-actions">
+          <div class="cart-item-qty">
+            <button type="button" data-action="minus" data-idx="${idx}" aria-label="−">−</button>
+            <span>${item.qty}</span>
+            <button type="button" data-action="plus" data-idx="${idx}" aria-label="+">+</button>
+          </div>
+          <button type="button" class="cart-item-remove" data-action="remove" data-idx="${idx}">${removeLabel}</button>
+        </div>
+      `;
+      list.appendChild(row);
+    });
+  }
+
+  // Cart item actions (qty / remove)
+  document.getElementById('cart-items')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-action]');
+    if (!btn) return;
+    const idx = parseInt(btn.dataset.idx, 10);
+    const action = btn.dataset.action;
+    const cart = getCart();
+    if (isNaN(idx) || !cart[idx]) return;
+
+    if (action === 'plus') {
+      cart[idx].qty = Math.min(20, cart[idx].qty + 1);
+    } else if (action === 'minus') {
+      cart[idx].qty = Math.max(1, cart[idx].qty - 1);
+    } else if (action === 'remove') {
+      cart.splice(idx, 1);
+    }
+    saveCart(cart);
+  });
+
+  document.getElementById('cart-clear')?.addEventListener('click', () => {
+    saveCart([]);
+  });
+
+  // Product card interactions
+  document.querySelectorAll('.product-card').forEach(card => {
+    // Size select
+    card.querySelectorAll('.size-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        card.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    // Qty
+    const qtyInput = card.querySelector('.qty-input');
+    card.querySelector('.qty-minus')?.addEventListener('click', () => {
+      qtyInput.value = Math.max(1, parseInt(qtyInput.value, 10) - 1);
+    });
+    card.querySelector('.qty-plus')?.addEventListener('click', () => {
+      qtyInput.value = Math.min(20, parseInt(qtyInput.value, 10) + 1);
+    });
+
+    // Add to cart
+    card.querySelector('.btn-add-cart')?.addEventListener('click', () => {
+      const id = card.dataset.id;
+      const name = card.dataset.name;
+      const nameEn = card.dataset.nameEn;
+      const price = parseInt(card.dataset.price, 10);
+      const size = card.querySelector('.size-btn.active')?.dataset.size || 'M';
+      const qty = Math.max(1, Math.min(20, parseInt(qtyInput.value, 10) || 1));
+
+      const cart = getCart();
+      const existing = cart.find(i => i.id === id && i.size === size);
+      if (existing) {
+        existing.qty = Math.min(20, existing.qty + qty);
+      } else {
+        cart.push({ id, name, nameEn, price, size, qty });
+      }
+      saveCart(cart);
+      showToast(translations[currentLang]?.toast_added || 'Adicionado ao carrinho');
+      qtyInput.value = 1;
     });
   });
+
+  // Checkout form → WhatsApp
+  document.getElementById('checkout-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const cart = getCart();
+    if (cart.length === 0) return;
+
+    const name = document.getElementById('co-name').value.trim();
+    const phone = document.getElementById('co-phone').value.trim();
+    const student = document.getElementById('co-student').value.trim();
+    const notes = document.getElementById('co-notes').value.trim();
+
+    if (!name || !phone) {
+      alert(currentLang === 'pt'
+        ? 'Por favor preencha o nome e o telefone.'
+        : 'Please fill in name and phone.');
+      return;
+    }
+
+    const lines = cart.map(i => {
+      const n = productName(i);
+      return `• ${n} — ${translations[currentLang]?.cart_size || 'Tamanho'} ${i.size} × ${i.qty} = ${formatKz(i.price * i.qty)}`;
+    });
+
+    const total = formatKz(cartTotal());
+    let text;
+    if (currentLang === 'pt') {
+      text = `Olá! Gostaria de encomendar uniformes do Colégio Lapidar.\n\n*Encomenda:*\n${lines.join('\n')}\n\n*Total: ${total}*\n\n*Nome:* ${name}\n*Telefone:* ${phone}`;
+      if (student) text += `\n*Aluno:* ${student}`;
+      if (notes) text += `\n*Observações:* ${notes}`;
+      text += `\n\nPor favor confirmem disponibilidade e forma de pagamento.`;
+    } else {
+      text = `Hello! I would like to order Colégio Lapidar uniforms.\n\n*Order:*\n${lines.join('\n')}\n\n*Total: ${total}*\n\n*Name:* ${name}\n*Phone:* ${phone}`;
+      if (student) text += `\n*Student:* ${student}`;
+      if (notes) text += `\n*Notes:* ${notes}`;
+      text += `\n\nPlease confirm availability and payment method.`;
+    }
+
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+  });
+
+  // Placeholder i18n for checkout notes
+  const origSetLanguage = setLanguage;
+  // Re-apply placeholders when language changes
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setTimeout(() => {
+        const ta = document.getElementById('co-notes');
+        if (ta && translations[currentLang]?.co_notes_ph) {
+          ta.placeholder = translations[currentLang].co_notes_ph;
+        }
+        renderCart();
+      }, 0);
+    });
+  });
+
+  // Init cart UI
+  updateBadge();
+  renderCart();
+  const taInit = document.getElementById('co-notes');
+  if (taInit && translations[currentLang]?.co_notes_ph) {
+    taInit.placeholder = translations[currentLang].co_notes_ph;
+  }
 });
