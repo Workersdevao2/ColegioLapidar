@@ -196,28 +196,32 @@ section {
 }
 
 .header-inner {
-  display: grid;
-  grid-template-columns: 36px 1fr auto;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 100%;
   max-width: var(--max);
   margin: 0 auto;
   padding: 0 1rem;
   position: relative;
-  gap: 0.5rem;
 }
 
-/* Brand — text only, centered */
+/* Brand — text only, true center of header */
 .brand {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  line-height: 1.15;
-  grid-column: 2;
-  color: #fff; /* default over hero */
+  line-height: 1.2;
+  color: #fff;
   transition: color 0.3s ease;
+  pointer-events: auto;
+  z-index: 1;
 }
 
 .header.scrolled .brand {
@@ -226,20 +230,22 @@ section {
 
 .brand-name {
   font-family: var(--font-sans);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
+  font-size: clamp(0.8rem, 3.2vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .brand-tagline {
   font-family: var(--font-sans);
-  font-size: 0.58rem;
+  font-size: clamp(0.5rem, 2vw, 0.58rem);
   font-weight: 400;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  opacity: 0.75;
-  margin-top: 0.15rem;
+  opacity: 0.8;
+  margin-top: 0.2rem;
+  white-space: nowrap;
 }
 
 /* Desktop nav — hidden on mobile, appears below brand on large screens */
@@ -304,8 +310,10 @@ section {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 0.75rem;
-  grid-column: 3;
+  gap: 0.65rem;
+  margin-left: auto;
+  position: relative;
+  z-index: 2;
 }
 
 /* Lang toggle */
@@ -358,7 +366,8 @@ section {
   background: none;
   border: none;
   padding: 0;
-  grid-column: 1;
+  position: relative;
+  flex-shrink: 0;
 }
 
 .hamburger span {
@@ -477,15 +486,16 @@ section {
 /* Desktop layout (≥900px): brand stacked above centered nav */
 @media (min-width: 900px) {
   :root {
-    --header-h: 110px;
+    --header-h: 118px;
   }
 
   .header-inner {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    justify-items: center;
-    gap: 0.65rem;
-    padding: 0.85rem 1.5rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 0.9rem 1.5rem 0.8rem;
   }
 
   .hamburger {
@@ -493,24 +503,26 @@ section {
   }
 
   .brand {
-    grid-column: 1;
-    grid-row: 1;
+    position: static;
+    left: auto;
+    top: auto;
+    transform: none;
   }
 
   .brand-name {
-    font-size: 0.78rem;
-    letter-spacing: 0.18em;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
   }
 
   .brand-tagline {
-    font-size: 0.6rem;
-    letter-spacing: 0.3em;
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    margin-top: 0.25rem;
   }
 
   .nav-desktop {
     display: block;
-    grid-column: 1;
-    grid-row: 2;
   }
 
   .header-actions {
@@ -518,7 +530,7 @@ section {
     right: 1.5rem;
     top: 50%;
     transform: translateY(-50%);
-    grid-column: unset;
+    margin-left: 0;
   }
 }
 
