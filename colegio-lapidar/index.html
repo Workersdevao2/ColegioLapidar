@@ -60,7 +60,7 @@
 
       <!-- Right actions (cart + lang) -->
       <div class="header-actions">
-        <a href="#checkout" class="cart-btn" aria-label="Carrinho">
+        <a href="checkout.html" class="cart-btn" aria-label="Carrinho">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
             <line x1="3" y1="6" x2="21" y2="6"/>
@@ -89,7 +89,7 @@
       <li><a href="#precos" data-i18n="nav_prices">Preços</a></li>
       <li><a href="#regulamento" data-i18n="nav_rules">Regulamento</a></li>
       <li><a href="#uniformes" data-i18n="nav_products">Uniformes</a></li>
-      <li><a href="#checkout" data-i18n="nav_checkout">Carrinho</a></li>
+      <li><a href="checkout.html" data-i18n="nav_checkout">Carrinho</a></li>
       <li><a href="#matriculas" data-i18n="nav_enroll">Matrículas</a></li>
       <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
     </ul>
@@ -534,60 +534,6 @@
               <button type="button" class="btn btn-sm btn-accent btn-add-cart" data-i18n="prod_add">Adicionar ao carrinho</button>
             </div>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== CHECKOUT ========== -->
-    <section id="checkout" class="section-alt">
-      <div class="container">
-        <div class="text-center mb-4">
-          <span class="section-label" data-i18n="checkout_label">Carrinho</span>
-          <h2 data-i18n="checkout_title">Finalizar Encomenda</h2>
-          <p class="lead" style="margin: 0 auto;" data-i18n="checkout_lead">Revise os artigos e envie a encomenda por WhatsApp. Confirmaremos disponibilidade e pagamento.</p>
-        </div>
-
-        <div class="checkout-grid">
-          <div class="checkout-cart card">
-            <h3 class="checkout-heading" data-i18n="checkout_items">Artigos</h3>
-            <div id="cart-items" class="cart-items">
-              <!-- filled by JS -->
-            </div>
-            <div id="cart-empty" class="cart-empty" data-i18n="cart_empty">O seu carrinho está vazio. Adicione uniformes na loja.</div>
-            <div class="cart-footer" id="cart-footer" hidden>
-              <div class="cart-total-row">
-                <span data-i18n="cart_total">Total</span>
-                <strong id="cart-total">0 Kz</strong>
-              </div>
-              <button type="button" class="btn btn-sm cart-clear" id="cart-clear" data-i18n="cart_clear">Limpar carrinho</button>
-            </div>
-          </div>
-
-          <div class="checkout-form-wrap card">
-            <h3 class="checkout-heading" data-i18n="checkout_details">Dados da encomenda</h3>
-            <form id="checkout-form" novalidate>
-              <div class="form-group">
-                <label for="co-name" data-i18n="form_name">Nome completo *</label>
-                <input type="text" id="co-name" name="name" required autocomplete="name" />
-              </div>
-              <div class="form-group">
-                <label for="co-phone" data-i18n="form_phone">Telefone / WhatsApp *</label>
-                <input type="tel" id="co-phone" name="phone" required autocomplete="tel" placeholder="+244 ..." />
-              </div>
-              <div class="form-group">
-                <label for="co-student" data-i18n="co_student">Nome do aluno (opcional)</label>
-                <input type="text" id="co-student" name="student" autocomplete="off" />
-              </div>
-              <div class="form-group">
-                <label for="co-notes" data-i18n="co_notes">Observações</label>
-                <textarea id="co-notes" name="notes" rows="3" data-i18n-placeholder="co_notes_ph" placeholder="Ex.: tamanho especial, levantamento na secretaria..."></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary btn-block" id="checkout-submit" data-i18n="checkout_submit" disabled>
-                Enviar encomenda via WhatsApp
-              </button>
-              <p class="checkout-note" data-i18n="checkout_note">A encomenda será enviada por WhatsApp. Não há pagamento online — confirme com a secretaria.</p>
-            </form>
-          </div>
         </div>
       </div>
     </section>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Finalizar encomenda de uniformes — Colégio Lapidar. Envie a sua encomenda por WhatsApp." />
+  <meta name="theme-color" content="#1a2332" />
+  <title>Carrinho / Checkout | Colégio Lapidar</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="assets/images/logo.png" />
+  <link rel="apple-touch-icon" href="assets/images/logo.png" />
+</head>
+<body class="page-checkout">
+
+  <div class="overlay" aria-hidden="true"></div>
+
+  <!-- Announcement bar -->
+  <a href="index.html#matriculas" class="announce-bar" role="status">
+    <div class="announce-inner">
+      <span data-i18n-html="announce">Matrículas 2026/2027 abertas — <em>Vagas limitadas</em></span>
+    </div>
+  </a>
+
+  <!-- Header -->
+  <header class="header scrolled">
+    <div class="header-inner">
+      <button class="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <a href="index.html" class="brand" aria-label="Colégio Lapidar">
+        <span class="brand-name">Colégio Lapidar</span>
+        <span class="brand-tagline">Educar para Transformar</span>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Navegação principal">
+        <ul>
+          <li><a href="index.html#inicio" data-i18n="nav_home">Início</a></li>
+          <li><a href="index.html#sobre" data-i18n="nav_about">Sobre</a></li>
+          <li><a href="index.html#niveis" data-i18n="nav_levels">Níveis</a></li>
+          <li><a href="index.html#precos" data-i18n="nav_prices">Preços</a></li>
+          <li><a href="index.html#uniformes" data-i18n="nav_products">Uniformes</a></li>
+          <li><a href="checkout.html" class="active" data-i18n="nav_checkout">Carrinho</a></li>
+          <li><a href="index.html#contacto" data-i18n="nav_contact">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="checkout.html" class="cart-btn" aria-label="Carrinho">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          <span class="cart-badge" id="cart-badge" hidden>0</span>
+        </a>
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button type="button" class="lang-btn active" data-lang="pt">PT</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile drawer -->
+  <nav class="nav-mobile" aria-label="Menu móvel">
+    <div class="nav-mobile-header">
+      <span class="nav-mobile-brand">Colégio Lapidar</span>
+      <button class="nav-mobile-close" aria-label="Fechar menu">&times;</button>
+    </div>
+    <ul>
+      <li><a href="index.html#inicio" data-i18n="nav_home">Início</a></li>
+      <li><a href="index.html#sobre" data-i18n="nav_about">Sobre</a></li>
+      <li><a href="index.html#niveis" data-i18n="nav_levels">Níveis</a></li>
+      <li><a href="index.html#precos" data-i18n="nav_prices">Preços</a></li>
+      <li><a href="index.html#uniformes" data-i18n="nav_products">Uniformes</a></li>
+      <li><a href="checkout.html" class="active" data-i18n="nav_checkout">Carrinho</a></li>
+      <li><a href="index.html#matriculas" data-i18n="nav_enroll">Matrículas</a></li>
+      <li><a href="index.html#contacto" data-i18n="nav_contact">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <main class="checkout-page-main">
+    <section class="checkout-page-section">
+      <div class="container">
+        <div class="checkout-breadcrumb">
+          <a href="index.html#uniformes" data-i18n="checkout_back">← Continuar a comprar</a>
+        </div>
+
+        <div class="text-center mb-4">
+          <span class="section-label" data-i18n="checkout_label">Carrinho</span>
+          <h1 class="checkout-page-title" data-i18n="checkout_title">Finalizar Encomenda</h1>
+          <p class="lead" style="margin: 0 auto;" data-i18n="checkout_lead">Revise os artigos e envie a encomenda por WhatsApp. Confirmaremos disponibilidade e pagamento.</p>
+        </div>
+
+        <div class="checkout-grid">
+          <div class="checkout-cart card">
+            <h2 class="checkout-heading" data-i18n="checkout_items">Artigos</h2>
+            <div id="cart-items" class="cart-items">
+              <!-- filled by JS -->
+            </div>
+            <div id="cart-empty" class="cart-empty">
+              <p data-i18n="cart_empty">O seu carrinho está vazio. Adicione uniformes na loja.</p>
+              <a href="index.html#uniformes" class="btn btn-sm btn-accent" style="margin-top: 1rem;" data-i18n="checkout_shop">Ver uniformes</a>
+            </div>
+            <div class="cart-footer" id="cart-footer" hidden>
+              <div class="cart-total-row">
+                <span data-i18n="cart_total">Total</span>
+                <strong id="cart-total">0 Kz</strong>
+              </div>
+              <button type="button" class="btn btn-sm cart-clear" id="cart-clear" data-i18n="cart_clear">Limpar carrinho</button>
+            </div>
+          </div>
+
+          <div class="checkout-form-wrap card">
+            <h2 class="checkout-heading" data-i18n="checkout_details">Dados da encomenda</h2>
+            <form id="checkout-form" novalidate>
+              <div class="form-group">
+                <label for="co-name" data-i18n="form_name">Nome completo *</label>
+                <input type="text" id="co-name" name="name" required autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="co-phone" data-i18n="form_phone">Telefone / WhatsApp *</label>
+                <input type="tel" id="co-phone" name="phone" required autocomplete="tel" placeholder="+244 ..." />
+              </div>
+              <div class="form-group">
+                <label for="co-student" data-i18n="co_student">Nome do aluno (opcional)</label>
+                <input type="text" id="co-student" name="student" autocomplete="off" />
+              </div>
+              <div class="form-group">
+                <label for="co-notes" data-i18n="co_notes">Observações</label>
+                <textarea id="co-notes" name="notes" rows="3" placeholder="Ex.: tamanho especial, levantamento na secretaria..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block" id="checkout-submit" data-i18n="checkout_submit" disabled>
+                Enviar encomenda via WhatsApp
+              </button>
+              <p class="checkout-note" data-i18n="checkout_note">A encomenda será enviada por WhatsApp. Não há pagamento online — confirme com a secretaria.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <img src="assets/images/logo.png" alt="Colégio Lapidar" width="44" height="52" />
+            <span>Colégio Lapidar</span>
+          </div>
+          <p data-i18n="footer_about">Colégio Lapidar — Educar para Transformar. Formação de qualidade, disciplina e valores em Angola.</p>
+        </div>
+        <div>
+          <h4 data-i18n="footer_links">Navegação</h4>
+          <ul style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <li><a href="index.html#sobre" data-i18n="nav_about">Sobre</a></li>
+            <li><a href="index.html#uniformes" data-i18n="nav_products">Uniformes</a></li>
+            <li><a href="checkout.html" data-i18n="nav_checkout">Carrinho</a></li>
+            <li><a href="index.html#matriculas" data-i18n="nav_enroll">Matrículas</a></li>
+            <li><a href="index.html#contacto" data-i18n="nav_contact">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="footer_contact">Contactos</h4>
+          <ul style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <li data-i18n="contact_address">Benfica, Rua 32 — Junto à Ponte do Mercado do Kifica</li>
+            <li><a href="https://wa.me/244950456485">+244 950 456 485</a></li>
+            <li><a href="tel:+244942187723">942 187 723</a></li>
+            <li><a href="mailto:colegiolapidar@gmail.com">colegiolapidar@gmail.com</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="footer_follow">Siga-nos</h4>
+          <div class="social-links">
+            <a href="https://www.instagram.com/lapidar.ao/" target="_blank" rel="noopener" aria-label="Instagram" style="border-color: rgba(255,255,255,0.2); color: #fff;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://www.facebook.com/lapidar.ao" target="_blank" rel="noopener" aria-label="Facebook" style="border-color: rgba(255,255,255,0.2); color: #fff;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span data-i18n="footer_copy">© 2026 Colégio Lapidar. Todos os direitos reservados.</span>
+        <span>Educar para Transformar</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
