@@ -305,6 +305,24 @@ section {
   width: 100%;
 }
 
+.nav-desktop a.nav-cta {
+  color: var(--accent-soft);
+  font-weight: 500;
+}
+
+.header.scrolled .nav-desktop a.nav-cta {
+  color: var(--accent);
+}
+
+.nav-desktop a.nav-cta::after {
+  display: none;
+}
+
+.nav-mobile a.nav-cta {
+  color: var(--accent);
+  font-weight: 500;
+}
+
 /* Header actions (right) */
 .header-actions {
   display: flex;
