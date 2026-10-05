@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pré-inscrição online Colégio Lapidar — Ano lectivo 2026/2027. Da Iniciação à 9.ª Classe." />
+  <meta name="theme-color" content="#1a2332" />
+  <title>Inscrição Online | Colégio Lapidar</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="assets/images/logo.png" />
+</head>
+<body class="page-enroll">
+
+  <div class="overlay" aria-hidden="true"></div>
+
+  <a href="index.html#matriculas" class="announce-bar" role="status">
+    <div class="announce-inner">
+      <span>Matrículas 2026/2027 abertas — <em>Vagas limitadas</em></span>
+    </div>
+  </a>
+
+  <header class="header scrolled">
+    <div class="header-inner">
+      <button class="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="index.html" class="brand" aria-label="Colégio Lapidar">
+        <span class="brand-name">Colégio Lapidar</span>
+        <span class="brand-tagline">Educar para Transformar</span>
+      </a>
+      <nav class="nav-desktop" aria-label="Navegação">
+        <ul>
+          <li><a href="index.html#inicio">Início</a></li>
+          <li><a href="index.html#niveis">Níveis</a></li>
+          <li><a href="index.html#precos">Preços</a></li>
+          <li><a href="index.html#uniformes">Uniformes</a></li>
+          <li><a href="inscricao.html" class="active">Inscrição</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="checkout.html" class="cart-btn" aria-label="Carrinho">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-badge" id="cart-badge" hidden>0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav-mobile" aria-label="Menu móvel">
+    <div class="nav-mobile-header">
+      <span class="nav-mobile-brand">Colégio Lapidar</span>
+      <button class="nav-mobile-close" aria-label="Fechar">&times;</button>
+    </div>
+    <ul>
+      <li><a href="index.html#inicio">Início</a></li>
+      <li><a href="index.html#niveis">Níveis</a></li>
+      <li><a href="index.html#precos">Preços</a></li>
+      <li><a href="index.html#uniformes">Uniformes</a></li>
+      <li><a href="inscricao.html" class="active">Inscrição</a></li>
+      <li><a href="index.html#matriculas">Matrículas</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <main class="enroll-main">
+    <div class="container enroll-layout">
+      <!-- Sidebar -->
+      <aside class="enroll-sidebar">
+        <div class="enroll-side-brand">
+          <img src="assets/images/logo.png" alt="" width="40" height="46" />
+          <div>
+            <strong>Colégio Lapidar</strong>
+            <span>Inscrição online</span>
+          </div>
+        </div>
+        <nav class="enroll-side-nav">
+          <a href="inscricao.html" class="active">Inscrição</a>
+          <a href="index.html#matriculas">Documentos</a>
+          <a href="index.html#precos">Preços</a>
+          <a href="index.html">← Voltar ao site</a>
+        </nav>
+        <div class="enroll-side-meta">
+          <p>Ano lectivo <strong>2026/2027</strong></p>
+          <p>Período: 10/07 — 30/07/2026</p>
+          <p>WhatsApp: <a href="https://wa.me/244950456485">+244 950 456 485</a></p>
+        </div>
+      </aside>
+
+      <!-- Form panel -->
+      <div class="enroll-panel">
+        <!-- Stepper -->
+        <ol class="enroll-steps" id="enroll-steps">
+          <li class="enroll-step active" data-step="1">
+            <span class="enroll-step-num">1</span>
+            <span class="enroll-step-label">Dados pessoais</span>
+          </li>
+          <li class="enroll-step" data-step="2">
+            <span class="enroll-step-num">2</span>
+            <span class="enroll-step-label">Dados académicos</span>
+          </li>
+          <li class="enroll-step" data-step="3">
+            <span class="enroll-step-num">3</span>
+            <span class="enroll-step-label">Confirmação</span>
+          </li>
+        </ol>
+
+        <form id="enroll-form" novalidate>
+          <!-- ========== STEP 1: Personal ========== -->
+          <div class="enroll-pane active" data-pane="1">
+            <div class="enroll-pane-head">
+              <h1>1. Dados pessoais</h1>
+              <p>Campos marcados com * são obrigatórios.</p>
+            </div>
+
+            <div class="enroll-type">
+              <label class="enroll-type-card">
+                <input type="radio" name="tipo" value="nova" checked />
+                <span>
+                  <strong>Matrícula nova</strong>
+                  <small>Primeira inscrição no Colégio Lapidar</small>
+                </span>
+              </label>
+              <label class="enroll-type-card">
+                <input type="radio" name="tipo" value="confirmacao" />
+                <span>
+                  <strong>Confirmação</strong>
+                  <small>Aluno já frequentou o colégio</small>
+                </span>
+              </label>
+            </div>
+
+            <h3 class="enroll-sub">Aluno</h3>
+            <div class="enroll-grid">
+              <div class="form-group span-2">
+                <label for="aluno-nome">Nome completo do aluno *</label>
+                <input type="text" id="aluno-nome" name="aluno_nome" required autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="aluno-nasc">Data de nascimento *</label>
+                <input type="date" id="aluno-nasc" name="aluno_nasc" required />
+              </div>
+              <div class="form-group">
+                <label for="aluno-genero">Género *</label>
+                <select id="aluno-genero" name="aluno_genero" required>
+                  <option value="">Seleccione</option>
+                  <option value="M">Masculino</option>
+                  <option value="F">Feminino</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="aluno-bi">Bilhete / Cédula</label>
+                <input type="text" id="aluno-bi" name="aluno_bi" placeholder="Ex: 007154272LA048" />
+              </div>
+              <div class="form-group span-2">
+                <label for="aluno-morada">Morada *</label>
+                <input type="text" id="aluno-morada" name="aluno_morada" required />
+              </div>
+            </div>
+
+            <h3 class="enroll-sub">Encarregado de educação</h3>
+            <div class="enroll-grid">
+              <div class="form-group span-2">
+                <label for="enc-nome">Nome completo *</label>
+                <input type="text" id="enc-nome" name="enc_nome" required />
+              </div>
+              <div class="form-group">
+                <label for="enc-parentesco">Parentesco *</label>
+                <select id="enc-parentesco" name="enc_parentesco" required>
+                  <option value="">Seleccione</option>
+                  <option value="Pai">Pai</option>
+                  <option value="Mãe">Mãe</option>
+                  <option value="Tutor">Tutor / Outro</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="enc-bi">BI do encarregado *</label>
+                <input type="text" id="enc-bi" name="enc_bi" required />
+              </div>
+              <div class="form-group">
+                <label for="enc-tel">Telefone / WhatsApp *</label>
+                <input type="tel" id="enc-tel" name="enc_tel" required placeholder="+244 ..." />
+              </div>
+              <div class="form-group">
+                <label for="enc-tel2">Telefone alternativo</label>
+                <input type="tel" id="enc-tel2" name="enc_tel2" />
+              </div>
+              <div class="form-group span-2">
+                <label for="enc-email">E-mail</label>
+                <input type="email" id="enc-email" name="enc_email" placeholder="exemplo@email.com" />
+              </div>
+            </div>
+
+            <div class="enroll-actions">
+              <span></span>
+              <button type="button" class="btn btn-primary" data-next="2">Seguinte →</button>
+            </div>
+          </div>
+
+          <!-- ========== STEP 2: Academic ========== -->
+          <div class="enroll-pane" data-pane="2">
+            <div class="enroll-pane-head">
+              <h1>2. Dados académicos</h1>
+              <p>Escolha o nível e, se desejar, actividades extracurriculares.</p>
+            </div>
+
+            <div class="enroll-grid">
+              <div class="form-group span-2">
+                <label for="nivel">Nível pretendido *</label>
+                <select id="nivel" name="nivel" required>
+                  <option value="">Seleccione</option>
+                  <option value="Iniciação">Iniciação</option>
+                  <option value="1.ª Classe">1.ª Classe</option>
+                  <option value="2.ª Classe">2.ª Classe</option>
+                  <option value="3.ª Classe">3.ª Classe</option>
+                  <option value="4.ª Classe">4.ª Classe</option>
+                  <option value="5.ª Classe">5.ª Classe</option>
+                  <option value="6.ª Classe">6.ª Classe</option>
+                  <option value="7.ª Classe">7.ª Classe</option>
+                  <option value="8.ª Classe">8.ª Classe</option>
+                  <option value="9.ª Classe">9.ª Classe</option>
+                </select>
+              </div>
+              <div class="form-group span-2">
+                <label for="escola-prev">Escola de proveniência</label>
+                <input type="text" id="escola-prev" name="escola_prev" placeholder="Opcional para matrícula nova" />
+              </div>
+              <div class="form-group">
+                <label for="classe-concluida">Última classe concluída</label>
+                <select id="classe-concluida" name="classe_concluida">
+                  <option value="">Seleccione</option>
+                  <option value="Nenhuma">Nenhuma / Primeira vez</option>
+                  <option value="Iniciação">Iniciação</option>
+                  <option value="1.ª">1.ª Classe</option>
+                  <option value="2.ª">2.ª Classe</option>
+                  <option value="3.ª">3.ª Classe</option>
+                  <option value="4.ª">4.ª Classe</option>
+                  <option value="5.ª">5.ª Classe</option>
+                  <option value="6.ª">6.ª Classe</option>
+                  <option value="7.ª">7.ª Classe</option>
+                  <option value="8.ª">8.ª Classe</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="ano-lectivo">Ano lectivo</label>
+                <input type="text" id="ano-lectivo" name="ano_lectivo" value="2026/2027" readonly />
+              </div>
+            </div>
+
+            <h3 class="enroll-sub">Actividades extracurriculares <small>(opcional)</small></h3>
+            <div class="enroll-extras">
+              <label class="enroll-check">
+                <input type="checkbox" name="extra" value="Ballet" />
+                <span>Ballet <em>15.000 Kz/mês</em></span>
+              </label>
+              <label class="enroll-check">
+                <input type="checkbox" name="extra" value="Xadrez" />
+                <span>Xadrez <em>10.000 Kz/mês</em></span>
+              </label>
+              <label class="enroll-check">
+                <input type="checkbox" name="extra" value="Karaté" />
+                <span>Karaté <em>10.000 Kz/mês</em></span>
+              </label>
+            </div>
+
+            <div class="form-group" style="margin-top: 1.25rem;">
+              <label for="obs">Observações</label>
+              <textarea id="obs" name="obs" rows="3" placeholder="Alergias, necessidades especiais, irmãos no colégio…"></textarea>
+            </div>
+
+            <div class="enroll-docs-note">
+              <strong>Documentos a entregar na secretaria</strong>
+              <ul id="docs-list-nova">
+                <li>Fotocópia da cédula ou BI do aluno</li>
+                <li>Fotocópia do BI do encarregado</li>
+                <li>Atestado médico</li>
+                <li>Duas fotografias tipo passe</li>
+                <li>Cartão de vacinas (Iniciação e 1.ª)</li>
+                <li>Boletim ou declaração de transferência</li>
+                <li>Comprovativo de morada</li>
+              </ul>
+              <ul id="docs-list-conf" hidden>
+                <li>Fotocópia actualizada do BI</li>
+                <li>Duas fotografias tipo passe</li>
+                <li>Cartão de vacinas (se aplicável)</li>
+                <li>Recibo da última prestação</li>
+                <li>Recibo de extracurriculares (se frequentar)</li>
+              </ul>
+            </div>
+
+            <div class="enroll-actions">
+              <button type="button" class="btn btn-ghost" data-prev="1">← Retroceder</button>
+              <button type="button" class="btn btn-primary" data-next="3">Seguinte →</button>
+            </div>
+          </div>
+
+          <!-- ========== STEP 3: Confirmation ========== -->
+          <div class="enroll-pane" data-pane="3">
+            <div class="enroll-pane-head">
+              <h1>3. Confirmação</h1>
+              <p>Revise os dados e escolha como pretende confirmar a inscrição.</p>
+            </div>
+
+            <div class="enroll-summary" id="enroll-summary">
+              <!-- filled by JS -->
+            </div>
+
+            <h3 class="enroll-sub">Como pretende confirmar? *</h3>
+            <div class="enroll-pay-options">
+              <label class="enroll-pay-card">
+                <input type="radio" name="confirmacao" value="presencial" checked />
+                <span>
+                  <strong>Confirmar na secretaria</strong>
+                  <small>Leve os documentos e efectue o pagamento presencialmente.</small>
+                </span>
+              </label>
+              <label class="enroll-pay-card">
+                <input type="radio" name="confirmacao" value="whatsapp" />
+                <span>
+                  <strong>Enviar pedido por WhatsApp</strong>
+                  <small>Receberá orientação da secretaria sobre documentos e taxas.</small>
+                </span>
+              </label>
+            </div>
+
+            <div class="enroll-fees card">
+              <h4>Taxas de referência 2026/2027</h4>
+              <ul>
+                <li><span>Matrícula (única)</span><strong>15.000 Kz</strong></li>
+                <li><span>Confirmação (única)</span><strong>10.000 Kz</strong></li>
+                <li><span>Apoio pedagógico (única)</span><strong>5.000 Kz</strong></li>
+                <li><span>Propina Iniciação–3.ª</span><strong>15.300 Kz/mês</strong></li>
+                <li><span>Propina 4.ª–6.ª</span><strong>17.500 Kz/mês</strong></li>
+                <li><span>Propina 7.ª–9.ª</span><strong>19.500 Kz/mês</strong></li>
+              </ul>
+              <p class="enroll-fees-note">Valores indicativos. Confirme na secretaria. Não há pagamento online nesta página.</p>
+            </div>
+
+            <label class="enroll-check enroll-confirm-check">
+              <input type="checkbox" id="aceito" name="aceito" required />
+              <span>Confirmo que os dados informados estão correctos e aceito o regulamento do colégio.</span>
+            </label>
+
+            <div class="enroll-actions">
+              <button type="button" class="btn btn-ghost" data-prev="2">← Retroceder</button>
+              <button type="submit" class="btn btn-primary" id="enroll-submit">Submeter inscrição</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border: none; padding-top: 0;">
+        <span>© 2026 Colégio Lapidar</span>
+        <span>Educar para Transformar</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/inscricao.js"></script>
+</body>
+</html>

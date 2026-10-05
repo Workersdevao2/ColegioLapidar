@@ -1899,6 +1899,567 @@ body.cart-open .overlay {
   .container { padding: 0 2rem; }
 }
 
+/* ---------- Enrollment page ---------- */
+.page-enroll .header {
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(12px);
+  border-bottom-color: var(--border);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+}
+
+.page-enroll .brand,
+.page-enroll .cart-btn,
+.page-enroll .hamburger span {
+  color: var(--navy);
+}
+
+.page-enroll .nav-desktop a {
+  color: var(--text-soft);
+}
+
+.page-enroll .nav-desktop a:hover,
+.page-enroll .nav-desktop a.active {
+  color: var(--navy);
+}
+
+.enroll-main {
+  padding-top: calc(var(--announce-h) + var(--header-h) + 1.25rem);
+  padding-bottom: 3rem;
+  min-height: 70vh;
+  background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 40%);
+}
+
+.enroll-layout {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .enroll-layout {
+    grid-template-columns: 240px 1fr;
+    align-items: start;
+    gap: 2rem;
+  }
+}
+
+.enroll-sidebar {
+  background: var(--navy);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 1.5rem 1.25rem;
+}
+
+.enroll-side-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.enroll-side-brand img {
+  flex-shrink: 0;
+}
+
+.enroll-side-brand strong {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.enroll-side-brand span {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.enroll-side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1.5rem;
+}
+
+.enroll-side-nav a {
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.75);
+  transition: background 0.2s, color 0.2s;
+}
+
+.enroll-side-nav a:hover,
+.enroll-side-nav a.active {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+.enroll-side-meta {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  opacity: 0.75;
+}
+
+.enroll-side-meta a {
+  color: var(--accent-soft);
+}
+
+.enroll-panel {
+  background: var(--surface);
+  border: var(--border-thin);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.25rem 2rem;
+  box-shadow: var(--shadow-soft);
+}
+
+@media (min-width: 640px) {
+  .enroll-panel {
+    padding: 2rem 2rem 2.5rem;
+  }
+}
+
+/* Stepper */
+.enroll-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: var(--border-thin);
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.enroll-step {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  position: relative;
+  padding: 0 0.75rem;
+}
+
+.enroll-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -0.5rem;
+  top: 50%;
+  width: 1rem;
+  height: 1px;
+  background: var(--border);
+}
+
+.enroll-step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.enroll-step.active {
+  color: var(--navy);
+}
+
+.enroll-step.active .enroll-step-num {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.enroll-step.done .enroll-step-num {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
+.enroll-step-label {
+  display: none;
+}
+
+@media (min-width: 480px) {
+  .enroll-step-label { display: inline; }
+}
+
+/* Panes */
+.enroll-pane {
+  display: none;
+}
+
+.enroll-pane.active {
+  display: block;
+}
+
+.enroll-pane-head {
+  margin-bottom: 1.5rem;
+}
+
+.enroll-pane-head h1 {
+  font-size: clamp(1.35rem, 3vw, 1.65rem);
+  margin-bottom: 0.35rem;
+  color: var(--navy);
+}
+
+.enroll-pane-head p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.enroll-sub {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin: 1.5rem 0 0.85rem;
+  padding-top: 0.5rem;
+  border-top: var(--border-thin);
+}
+
+.enroll-sub:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.enroll-sub small {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text-muted);
+}
+
+/* Type cards */
+.enroll-type {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 560px) {
+  .enroll-type { grid-template-columns: 1fr 1fr; }
+}
+
+.enroll-type-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem 1.1rem;
+  border: var(--border-thin);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.enroll-type-card:has(input:checked) {
+  border-color: var(--navy);
+  background: rgba(26, 35, 50, 0.03);
+}
+
+.enroll-type-card input {
+  margin-top: 0.2rem;
+  accent-color: var(--navy);
+}
+
+.enroll-type-card strong {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 0.15rem;
+}
+
+.enroll-type-card small {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+/* Form grid */
+.enroll-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .enroll-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .enroll-grid .span-2 {
+    grid-column: span 2;
+  }
+}
+
+.enroll-panel .form-group label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-soft);
+  margin-bottom: 0.35rem;
+}
+
+.enroll-panel .form-group input,
+.enroll-panel .form-group select,
+.enroll-panel .form-group textarea {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+.enroll-panel .form-group input:focus,
+.enroll-panel .form-group select:focus,
+.enroll-panel .form-group textarea:focus {
+  border-color: var(--navy);
+  outline: none;
+}
+
+.enroll-panel .form-group input.invalid,
+.enroll-panel .form-group select.invalid {
+  border-color: #b91c1c;
+}
+
+/* Extras */
+.enroll-extras {
+  display: grid;
+  gap: 0.5rem;
+}
+
+@media (min-width: 560px) {
+  .enroll-extras { grid-template-columns: repeat(3, 1fr); }
+}
+
+.enroll-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.75rem 0.9rem;
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: border-color 0.2s;
+}
+
+.enroll-check:has(input:checked) {
+  border-color: var(--navy);
+  background: rgba(26, 35, 50, 0.03);
+}
+
+.enroll-check input {
+  margin-top: 0.15rem;
+  accent-color: var(--navy);
+}
+
+.enroll-check em {
+  display: block;
+  font-style: normal;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+.enroll-docs-note {
+  margin-top: 1.5rem;
+  padding: 1rem 1.15rem;
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+  font-size: 0.82rem;
+}
+
+.enroll-docs-note strong {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 0.65rem;
+}
+
+.enroll-docs-note ul {
+  padding-left: 1.1rem;
+  color: var(--text-soft);
+  line-height: 1.7;
+}
+
+.enroll-docs-note li {
+  list-style: disc;
+}
+
+/* Summary */
+.enroll-summary {
+  display: grid;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 560px) {
+  .enroll-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.enroll-summary-item {
+  padding: 0.85rem 1rem;
+  background: var(--bg-alt);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+}
+
+.enroll-summary-item span {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.enroll-summary-item strong {
+  font-weight: 500;
+  color: var(--navy);
+}
+
+/* Pay options */
+.enroll-pay-options {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.enroll-pay-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem 1.1rem;
+  border: var(--border-thin);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.enroll-pay-card:has(input:checked) {
+  border-color: var(--accent);
+  background: rgba(180, 83, 9, 0.04);
+}
+
+.enroll-pay-card input {
+  margin-top: 0.2rem;
+  accent-color: var(--accent);
+}
+
+.enroll-pay-card strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--navy);
+  margin-bottom: 0.15rem;
+}
+
+.enroll-pay-card small {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.enroll-fees {
+  padding: 1.15rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.enroll-fees h4 {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+  color: var(--navy);
+}
+
+.enroll-fees ul {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.enroll-fees li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.85rem;
+  padding: 0.35rem 0;
+  border-bottom: var(--border-thin);
+}
+
+.enroll-fees li:last-child {
+  border-bottom: none;
+}
+
+.enroll-fees li span {
+  color: var(--text-soft);
+}
+
+.enroll-fees-note {
+  margin-top: 0.85rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.enroll-confirm-check {
+  margin-bottom: 1.25rem;
+  border: none;
+  padding: 0;
+}
+
+.enroll-confirm-check span {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  line-height: 1.45;
+}
+
+.enroll-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: var(--border-thin);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: var(--border-thin);
+  color: var(--text-soft);
+  padding: 0.65rem 1.25rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-ghost:hover {
+  border-color: var(--navy);
+  color: var(--navy);
+}
+
 /* Print / accessibility */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
